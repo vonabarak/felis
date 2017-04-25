@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load bootstrap3 i18n %}
+{% block title %}Filesystems{% endblock %}
+
+{% block content %}
+    <div class="tabbable">
+    <table class="table table-striped table-bordered">
+            <tr>
+                <th>#</th>
+                <th>name</th>
+                <th>description</th>
+                <th>path</th>
+                <th>snapshots</th>
+                <th>skel</th>
+            </tr>
+        {% for line in object_list %}
+            <tr class="clickable-row" data-href="{{ line.get_absolute_url }}">
+            <th scope="row">
+                <td>{{ line.id }}</td>
+                <td><a href="{{ line.get_absolute_url }}">{{ line.name }}</a></td>
+                <td>{{ line.description }}</td>
+                <td>{{ line.zpath }}</td>
+                <td>
+                    {% if line.snapshots.all %}
+                        {% for s in line.snapshots.all %}
+                            {{ s.name }}&nbsp;
+                        {% endfor %}
+                    {% endif %}
+                </td>
+                <td>{{ line.base.path }}</td>
+                <div class="pull-right">
+                    {% if model.add_url %}
+                        <a href="{{ model.add_url }}" class="btn btn-xs addlink"><span class="glyphicon glyphicon-plus"></span>
+                            {% trans 'Add' %}</a>
+                    {% endif %}
+                    {% if model.admin_url %}
+                        <a href="{{ model.admin_url }}" class="btn btn-xs changelink"><span class="glyphicon glyphicon-edit"></span>
+                            {% trans 'Change' %}</a>
+                    {% endif %}
+                </div>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+    <hr>
+
+{#    {% bootstrap_pagination lines size="small" %}#}
+{% endblock %}

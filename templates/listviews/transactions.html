@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load tags %}
+{% load tz %}
+{% block title %}Transactions{% endblock %}
+
+{% block content %}
+<div class="panel-group" id="accordion">
+    {% for i in object_list %}
+        <div class="panel">
+            <div class="panel-heading btn btn-xs {% if i.committed %}btn-success{% elif line.rolledback %}btn-danger{% else %}btn-info{% endif %}" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ i.pk }}" style="text-align:left; width: 100%;">
+                <div class="panel-title">
+                    <div style="display: inline-flex">
+                        <b>#{{ i.pk }}</b>
+                    </div>
+                    <div style="display: inline-flex" class="col-sm-offset-1">
+                        for &lt{{ i.instance }}&gt
+                        {{ i.get_change_type_display }}
+                        {% if i.field %}
+                            {% with i.field as f %}{{ i.field }} from {{ i.old_values_dict|get:f}} to {{ i.new_values_dict|get:f }}{% endwith %}
+                        {% elif i.fields %}
+                            updating {{ i.fields|truncatechars:45 }}
+                        {% endif %}
+                    </div>
+                    <div style="display: inline-flex; float: right">
+                        {% if i.author %} by {{ i.author }}{% endif %}&nbsp on {{ i.created|localtime }}
+                    </div>
+                </div>
+            </div>
+
+            <div id="collapse{{ i.pk }}" class="panel-collapse collapse{# {% if forloop.first %}in{% endif %} #}">
+                <div class="panel-body">
+                    <div><b>value</b> {{ i.value }}</div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-4"><b>old values &nbsp</b><pre style="white-space: pre-wrap">{{ i.old_values_dict|json_prettyfy }}</pre></div>
+                    <div class="col-sm-4"><b>new values &nbsp</b><pre style="white-space: pre-wrap">{{ i.new_values_dict|json_prettyfy }}</pre></div>
+                    <div class="col-sm-4"><b>cached values &nbsp</b><pre style="white-space: pre-wrap">{{ i.cached_data|json_prettyfy }}</pre></div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <hr>
+    {% paginator object_list request %}
+</div>
+{% endblock %}
+
+{% block context_menu %}
+    {% if show_system %}
+    <a href="{% url 'transactions' %}">Don't show system transactions</a>
+    {% else %}
+    <a href="{% url 'transactions' %}?show_system=true">Show system transactions</a>
+    {% endif %}
+    <hr>
+{% endblock %}

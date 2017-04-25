@@ -1,0 +1,83 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$30000$GqbxNFi5p9dc$zEl6q00MUndG0v8SDPQtU0IXmKC/k0oCt0FcUXksh34=",
+        "last_login": "2017-03-08T12:03:52.800Z",
+        "is_superuser": true,
+        "username": "felis",
+        "first_name": "Felis",
+        "last_name": "Silvestris",
+        "email": "felis@vonabarak.ru",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2017-03-08T12:03:32.415Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 1,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "filesystem"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 2,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "filesystem"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 3,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "filesystem"
+        ]
+    }
+},
+{
+    "model": "felis.filesystem",
+    "pk": 1,
+    "fields": {
+        "name": "zroot",
+        "description": "",
+        "quota": null,
+        "parent": null,
+        "mountpoint": ""
+    }
+},
+{
+    "model": "felis.filesystem",
+    "pk": 2,
+    "fields": {
+        "name": "felis",
+        "description": "",
+        "quota": null,
+        "parent": 1,
+        "mountpoint": ""
+    }
+},
+{
+    "model": "felis.filesystem",
+    "pk": 3,
+    "fields": {
+        "name": "multiple_updating_test",
+        "description": "",
+        "quota": null,
+        "parent": 1,
+        "mountpoint": ""
+    }
+}
+]

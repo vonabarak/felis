@@ -1,0 +1,341 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$30000$GqbxNFi5p9dc$zEl6q00MUndG0v8SDPQtU0IXmKC/k0oCt0FcUXksh34=",
+        "last_login": "2017-03-12T20:29:01.135Z",
+        "is_superuser": true,
+        "username": "felis",
+        "first_name": "Felis",
+        "last_name": "Silvestris",
+        "email": "felis@vonabarak.ru",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2017-03-11T01:01:31.459Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "!gYz5VzG1ET8AxGdkywJR9e2AfgO4JKSfhuw0a2g0",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "AnonymousUser",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-03-12T23:27:38.966Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "felis.userpreferences",
+    "pk": 1,
+    "fields": {
+        "ssh_pubkey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC7+r6uhQhjZX7UVlCTUKolRJi8gT4HtI+POKdwph6WfRSq9xDDYz1twzszc7nak83HQVTmCI81AcA+BHhuKGMYDYe3b4FP+6TaduBLORcHdKRw9ySMzyJIKwFUDzNutZg8/oHYleo0h1UVRYixbavnn1tUbMgclIrtX2j47VzSsS2Q0ag60TSrEfjfTUQlHOjw3GvYmcMJxnakP659Vyq6/NUKhphMzR604f3AG94E0X+b5ZjrfhBQ2jgu5AWD1MzslMo0aIqhOjRg41Qm/YT3i4+GQ24A0BB7S48jgdl2aoMCzJRLa/FCJu4o+ZE1KuKuZ7c+wfRdx46rnnI512ctImGqpF6OpFBjNQCflP7IQAwjn3wGwUbRMjw/D6Oh2jCrKLFkqfYuIvLrQRoKr1nbbSVuvYug41QSiO7O+KGytp+FnnScxFlxSvkeXqhdRkaTrcKJtKnbZKtINGKOMguvuK0zG7EIbSzCc7CDLHaqpdjDAOvWdF2hN8NqO4ZliMvGqzDThiqYh1eLJhMfySsfAk6FeU20xrOLiKY+IjhW2Ub8PL63UMmb1GBXGcebqRuGWcXnLmZjqsUqlk4YR6hngdPpi2YfbQFyl9pSOdmsqIntTvXcXZBrKkWonnT4VSJdwhMchUWaupsW46WdaKpSreXQf899J+VGcj2ctDW6YQ== bobr@equus"
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 1,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "filesystem"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 2,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "filesystem"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 3,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "filesystem"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 4,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "filesystem"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 5,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "filesystem"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 6,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "world"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 7,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "snapshot"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 9,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "filesystem"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 10,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "skel"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 11,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "interface"
+        ]
+    }
+},
+{
+    "model": "felis.model",
+    "pk": 12,
+    "fields": {
+        "polymorphic_ctype": [
+            "felis",
+            "jail"
+        ]
+    }
+},
+{
+    "model": "felis.filesystem",
+    "pk": 1,
+    "fields": {
+        "name": "zroot",
+        "description": "",
+        "quota": null,
+        "parent": null,
+        "mountpoint": ""
+    }
+},
+{
+    "model": "felis.filesystem",
+    "pk": 2,
+    "fields": {
+        "name": "felis",
+        "description": "",
+        "quota": null,
+        "parent": 1,
+        "mountpoint": "/opt/felis"
+    }
+},
+{
+    "model": "felis.filesystem",
+    "pk": 3,
+    "fields": {
+        "name": "worlds",
+        "description": "",
+        "quota": null,
+        "parent": 2,
+        "mountpoint": ""
+    }
+},
+{
+    "model": "felis.filesystem",
+    "pk": 4,
+    "fields": {
+        "name": "skels",
+        "description": "",
+        "quota": null,
+        "parent": 2,
+        "mountpoint": ""
+    }
+},
+{
+    "model": "felis.filesystem",
+    "pk": 5,
+    "fields": {
+        "name": "jails",
+        "description": "",
+        "quota": null,
+        "parent": 2,
+        "mountpoint": ""
+    }
+},
+{
+    "model": "felis.filesystem",
+    "pk": 6,
+    "fields": {
+        "name": "default",
+        "description": "",
+        "quota": null,
+        "parent": 3,
+        "mountpoint": ""
+    }
+},
+{
+    "model": "felis.filesystem",
+    "pk": 9,
+    "fields": {
+        "name": "default",
+        "description": "",
+        "quota": null,
+        "parent": 4,
+        "mountpoint": ""
+    }
+},
+{
+    "model": "felis.filesystem",
+    "pk": 12,
+    "fields": {
+        "name": "jailone",
+        "description": "",
+        "quota": null,
+        "parent": 5,
+        "mountpoint": ""
+    }
+},
+{
+    "model": "felis.snapshot",
+    "pk": 7,
+    "fields": {
+        "name": "20170222092901",
+        "description": "",
+        "base": 6
+    }
+},
+{
+    "model": "felis.snapshot",
+    "pk": 10,
+    "fields": {
+        "name": "empty",
+        "description": "",
+        "base": 9
+    }
+},
+{
+    "model": "felis.clone",
+    "pk": 12,
+    "fields": {
+        "base": 10
+    }
+},
+{
+    "model": "felis.world",
+    "pk": 6,
+    "fields": {
+        "src_conf": "",
+        "make_conf": ""
+    }
+},
+{
+    "model": "felis.skel",
+    "pk": 10,
+    "fields": {
+        "domainname": "felis_devel.vonabarak.ru",
+        "exec_system_user": "root",
+        "exec_jail_user": "root",
+        "exec_start": "/bin/sh /etc/rc",
+        "exec_stop": "/bin/sh /etc/rc.shutdown",
+        "mount": "",
+        "mount_devfs": true,
+        "mount_fdescfs": true,
+        "mount_procfs": true,
+        "devfs_ruleset": 2,
+        "enforce_statfs": 2,
+        "allow_raw_sockets": true,
+        "allow_socket_af": true,
+        "allow_set_hostname": false,
+        "allow_sysvipc": false,
+        "allow_mount": false,
+        "allow_mount_zfs": false,
+        "allow_mount_procfs": false,
+        "allow_mount_devfs": false,
+        "allow_chflags": false
+    }
+},
+{
+    "model": "felis.jail",
+    "pk": 12,
+    "fields": {
+        "domainname": null,
+        "exec_system_user": "root",
+        "exec_jail_user": "root",
+        "exec_start": "/bin/sh /etc/rc",
+        "exec_stop": "/bin/sh /etc/rc.shutdown",
+        "mount": "{world_template.path} {path}/.ro nullfs ro 0 0\r\n{world_template.path}/etc {path}/etc unionfs rw,below,noatime 0 0",
+        "mount_devfs": null,
+        "mount_fdescfs": null,
+        "mount_procfs": null,
+        "devfs_ruleset": null,
+        "enforce_statfs": null,
+        "allow_raw_sockets": null,
+        "allow_socket_af": null,
+        "allow_set_hostname": null,
+        "allow_sysvipc": null,
+        "allow_mount": null,
+        "allow_mount_zfs": null,
+        "allow_mount_procfs": null,
+        "allow_mount_devfs": null,
+        "allow_chflags": null,
+        "jid": 1,
+        "world_template": 6,
+        "status": 0
+    }
+},
+{
+    "model": "felis.interface",
+    "pk": 11,
+    "fields": {
+        "name": "lo0",
+        "type": 2,
+        "description": "",
+        "os_managed": true
+    }
+}
+]

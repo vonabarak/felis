@@ -1,0 +1,37 @@
+<script>
+    function getContextMenuState() {
+        if (!(sessionStorage.contextMenuState == null)) {
+            var width = document.getElementById("contextMenu").style.width;
+            if (width == 0 || width == '0px') {
+                sessionStorage.contextMenuState = 'closed';
+            } else {
+                sessionStorage.contextMenuState = 'opened';
+            }
+        }
+        return sessionStorage.contextMenuState;
+    }
+    function openContextMenu() {
+        var width = "250px";
+        document.getElementById("contextMenu").style.width = width;
+        document.getElementById("main").style.marginLeft = width;
+        sessionStorage.contextMenuState = 'opened';
+    }
+    function closeContextMenu() {
+        var width = "0px";
+        document.getElementById("contextMenu").style.width = width;
+        document.getElementById("main").style.marginLeft = width;
+        sessionStorage.contextMenuState = 'closed';
+    }
+    function switchContextMenu() {
+        if (getContextMenuState() == 'opened') {
+            closeContextMenu();
+        } else {
+            openContextMenu();
+        }
+    }
+    $(function() {
+        if (sessionStorage.contextMenuState == 'opened') {
+            openContextMenu();
+        }
+    });
+</script>

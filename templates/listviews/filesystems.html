@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}Felis{% endblock %}
+
+{% block content %}
+    <table class="table">
+            <tr>
+                <th>#</th>
+                <th>name</th>
+                <th>description</th>
+                <th>zfs path</th>
+                <th>path</th>
+                <th>snapshots</th>
+            </tr>
+        {% for line in object_list %}
+            <tr class="clickable-row" data-href="{{ line.get_absolute_url }}">
+                <td>{{ line.id }}</td>
+                <td>{{ line.name }}</td>
+                <td>{{ line.description }}</td>
+                <td>{{ line.zpath }}</td>
+                <td>{{ line.path }}</td>
+                <td>
+                    {% if line.snapshots.all %}
+                        {% for s in line.snapshots.all %}
+                            {{ s.name }}&nbsp;
+                        {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <hr>
+
+{% endblock %}
+
+{% block context_menu %}
+    <a href="{% url 'admin:felis_filesystem_add' %}">Add</a>
+{% endblock %}

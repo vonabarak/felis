@@ -1,0 +1,105 @@
+{% load tags %}
+{% load i18n staticfiles bootstrapped_goodies_tags %}
+<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main_nav">
+        <span class="sr-only">Toggle navigation</span>
+        <div style="font-size: x-large;"> &#9776; </div>
+    </button>
+    <a class="navbar-brand" href="#" onclick="switchContextMenu()">
+        <p>
+            <span class='tip-on-hover'><img src="{% static 'img/felis_gray.png'%}" style='margin-top: -13px; border-radius: 7px'>
+                <span class='tip'></span>
+            </span>
+            <span style="font-size:30px; font-weight:bold; color: white">FEL<span style="color: lime">I</span>S</span>
+        </p>
+    </a>
+</div>
+
+<div class="navbar-collapse collapse" id='main_nav'>
+    {% url 'jails' as jails %}
+    {% url 'filesystems' as filesystems %}
+    {% url 'worlds' as worlds %}
+    {% url 'skels' as skels %}
+    {% url 'transactions' as transactions %}
+    {% url 'admin:index' as admin %}
+    <ul class="nav navbar-nav">
+        <li class={% active request jails %}><a href="{{ jails }}">Jails</a></li>
+        <li class={% active request filesystems %}><a href="{{ filesystems }}">Filesystems</a></li>
+        <li class={% active request worlds %}><a href="{{ worlds }}">Worlds</a></li>
+        <li class={% active request skels %}><a href="{{ skels }}">Skels</a></li>
+        <li class="divider-vertical"></li>
+        <li class={% active request transactions %}><a href="{{ transactions }}">Transactions</a></li>
+        <li class={% active request admin %}><a href="{{ admin }}">Administration</a></li>
+        {% block logs %}
+            <li class="dropdown" id="recent-actions-module">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Recent Actions' %} <b class="caret"></b></a>
+                {% load log %}
+                {% get_admin_log 15 as admin_log for_user user %}
+                <ul class="dropdown-menu">
+                    {% for entry in admin_log %}
+                        <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                            <a href="{% if entry.is_deletion or not entry.get_admin_url %}#{% else %}{{ entry.get_admin_url }}{% endif %}">
+                                <i class="glyphicon glyphicon-{% if entry.is_addition %}plus{% endif %}{% if entry.is_change %}edit{% endif %}{% if entry.is_deletion %}remove{% endif %}"></i>
+                                {{ entry.object_repr }}
+                                {% if entry.content_type %}
+                                    <span class="mini quiet">({% filter capfirst %}{{ entry.content_type }}{% endfilter %})</span>
+                                {% else %}
+                                    <span class="mini quiet">({% trans 'Unknown content' %})</span>
+                                {% endif %}
+                            </a>
+                        </li>
+                    {% empty %}
+                        <li class="disabled"><a href="#">{% trans 'None available' %}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endblock %}
+        {% block languages %}
+            {% language_selector %}
+        {% endblock languages %}
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            {% if user.is_authenticated %}
+                {% block welcome-msg %}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Welcome, ' %} <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username %}{% endfilter %}</strong> <span class="caret"></span></a>
+                {% endblock %}
+
+                <ul class="dropdown-menu" role="menu">
+                    {% if user.is_active and user.is_staff %}
+                        {% url 'django-admindocs-docroot' as docsroot %}
+                        {% if docsroot %}
+                            <li><a href="{{ docsroot }}">{% trans 'Documentation' %}</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'errorlog' %}">{% trans 'Error log' %}</a></li>
+                    {% endif %}
+
+                    <li role="presentation" class="divider"></li>
+
+                    <li><a href="{% url 'admin:felis_model_add' %}"><strong>Add</strong></a></li>
+                    <li><a href="{% url 'admin:felis_filesystem_add' %}">filesystem</a></li>
+                    <li><a href="{% url 'admin:felis_world_add' %}">world</a></li>
+                    <li><a href="{% url 'admin:felis_skel_add' %}">skel</a></li>
+                    <li><a href="{% url 'admin:felis_jail_add' %}">jail</a></li>
+                    <li><a href="{% url 'admin:felis_interface_add' %}">network interface</a></li>
+                    <li><a href="{% url 'admin:felis_ipaddress_add' %}">ip address</a></li>
+
+                    <li role="presentation" class="divider"></li>
+
+                    <li><a href="{% url 'admin:felis_userpreferences_change' user.pk %}">{% trans 'Prefrences' %}</a></li>
+                    {% if user.has_usable_password %}
+                        <li><a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a></li>
+                </ul>
+            {% else %}
+                <a href="{% url 'admin:index' %}">
+                    {% trans 'Welcome, ' %}<strong>{% trans 'Anonymous' %}</strong><span class="caret"></span>
+                </a>
+            {% endif %}
+        </li>
+    </ul>
+</div>
+</div>

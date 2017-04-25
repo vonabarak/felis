@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}Log{% endblock %}
+
+{% block content %}
+{#    <a href="{% url 'selfcheck_reset' %}" class="btn btn-default">Сбросить статус ошибок</a>#}
+    <hr>
+    <p>
+    <a href="./?level=10" class="btn btn-success">Debug</a>
+    <a href="./?level=20" class="btn btn-info">Info</a>
+    <a href="./?level=30" class="btn btn-warning">Warning</a>
+    <a href="./?level=40" class="btn btn-danger">Error</a>
+    <a href="./?level=50" class="btn btn-primary">Fatal</a>
+    </p>
+    <table class="table">
+
+        {% for line in object_list %}
+            <tr>
+            <hr>
+                <p>ctime: {{ line.ctime }}</p>
+                <p>logger: {{ line.logger_name }}</p>
+                <p>level: {{ line.level }}</p>
+                <p>msg: {{ line.msg }}</p>
+                {% if line.trace %}
+                <pre>{{ line.trace }}</pre>
+                {% endif %}
+                <p>viewed: {{ line.viewed }}</p>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <hr>
+
+    {% bootstrap_pagination object_list extra="level="|add:level|add:"&logger="|add:logger size="small" %}
+
+{% endblock %}

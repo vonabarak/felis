@@ -1,0 +1,99 @@
+
+.edit_link:link span, .edit_link:visited span {
+    visibility: hidden;
+    font-size: xx-small;
+}
+.edit_link:link:hover span, .edit_link:visited:hover span {
+    visibility: visible;
+    font-size: xx-small;
+}
+body {
+    background-color: #999;
+}
+.navbar {
+    background-color: #777;
+}
+.navbar-default .navbar-nav>li>a {
+    color: black;
+}
+.navbar-default .navbar-nav>li>a:hover {
+    color: black;
+    background-color: #dff0d8;
+}
+.dropdown-menu {
+    background-color: #777;
+}
+.dropdown-menu>li>a:hover {
+    background-color: #dff0d8;
+}
+tr.clickable-row:hover {
+    background-color: #dff0d8;
+    color: black;
+}
+td.clickable-row:hover {
+    background-color: #dff0d8;
+    color: black;
+}
+
+/*
+ vertical dividers for bootstrap3
+ http://stackoverflow.com/questions/19203816/vertical-divider-doesnt-work-in-bootstrap-3
+*/
+.navbar .divider-vertical {
+    height: 50px;
+    margin: 0 9px;
+    border-right: 1px solid #ffffff;
+    border-left: 1px solid #f2f2f2;
+}
+
+.navbar-inverse .divider-vertical {
+    border-right-color: #222222;
+    border-left-color: #111111;
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse .nav > .divider-vertical {
+        display: none;
+     }
+}
+
+
+/*
+ side navigation bar
+*/
+.sidenav {
+    background-color: #777;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    background-color: #777;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    color: black;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    background-color: #dff0d8;
+    color: black;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

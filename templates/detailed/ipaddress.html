@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}Jail{% endblock %}
+
+{% block content %}
+    <a class="btn btn-default" href="{% url 'update_jail' jail.pk %}">Edit&nbsp;</a>
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>{{ jail.name }}</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>
+                {{ jail.get_status_display }}&nbsp;
+                {% if jail.status == 'R' %}
+                <a href="{% url 'jail' jail.pk %}?action=start" class="btn btn-success disabled">Start</a>
+                <a href="{% url 'jail' jail.pk %}?action=stop" class="btn btn-warning">Stop</a>
+                {% else %}
+                <a href="{% url 'jail' jail.pk %}?action=start" class="btn btn-success ">Start</a>
+                <a href="{% url 'jail' jail.pk %}?action=stop" class="btn btn-warning disabled">Stop</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% if jail.jid %}
+        <tr>
+            <td>Jid</td>
+            <td>{{ jail.jid }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td>ZFS path</td>
+            <td class="clickable-row" data-href="{{ jail.get_absolute_url }}">{{ jail.zpath }}</td>
+        </tr>
+        <tr>
+            <td>UNIX Path</td>
+            <td>{{ jail.path }}</td>
+        </tr>
+        <tr>
+            <td>Base</td>
+            <td class="clickable-row" data-href="{{ jail.base.base.get_absolute_url }}">{{ jail.base.zpath }}</td>
+        </tr>
+        <tr>
+            <td>World</td>
+            <td class="clickable-row" data-href="{{ jail.jworld.get_absolute_url }}">{{ jail.jworld.zpath }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <a href="{% url 'delete_jail' jail.pk %}" class="btn btn-danger {% if jail.status == 'R' %}disabled{% endif %} ">Destroy</a>
+{#                <a href="{% url 'delete_jail' jail.pk %}" class="btn btn-danger">Reinstall</a>#}
+            </td>
+        </tr>
+    </table>
+    <hr>
+{% endblock %}

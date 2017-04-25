@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}Jail{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>{{ jail.name }}</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>
+                {% if jail.status == 1 %}
+                <a href="#" class="btn btn-success disabled">Start</a>
+                <a href="{% url 'jail' jail.pk %}?status=stop" class="btn btn-warning">Stop</a>
+                {% elif jail.status == 0 %}
+                <a href="{% url 'jail' jail.pk %}?status=start" class="btn btn-success ">Start</a>
+                <a href="#" class="btn btn-warning disabled">Stop</a>
+                {% else %}
+                    <a href="#" class="btn btn-success disabled">Start</a>
+                    <a href="#" class="btn btn-warning disabled">Stop</a>
+                {% endif %}
+                {{ jail.status_displayname }}&nbsp;
+            </td>
+        </tr>
+        {% if jail.jid %}
+        <tr>
+            <td>Jid</td>
+            <td>{{ jail.jid }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td>ZFS path</td>
+            <td class="clickable-row" data-href="{{ jail.get_absolute_url }}">{{ jail.zpath }}</td>
+        </tr>
+        <tr>
+            <td>UNIX Path</td>
+            <td>{{ jail.path }}</td>
+        </tr>
+        <tr>
+            <td>Base</td>
+            <td class="clickable-row" data-href="{{ jail.base.base.get_absolute_url }}">{{ jail.base.zpath }}</td>
+        </tr>
+        <tr>
+            <td>World</td>
+            <td class="clickable-row" data-href="{{ jail.jworld.get_absolute_url }}">{{ jail.jworld.zpath }}</td>
+        </tr>
+        <tr>
+            <td>Console over SSH</td>
+            <td>
+                {% if jail.console %}
+                <a href="#" class="btn btn-success disabled">Start</a>
+                <a href="{% url 'jail' jail.pk %}?console=0" class="btn btn-warning">Stop</a>
+                {{ ssh }}
+                {% else %}
+                <a href="{% url 'jail' jail.pk %}?console=1" class="btn btn-success ">Start</a>
+                <a href="#" class="btn btn-warning disabled">Stop</a>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <a href="{% url 'admin:felis_jail_delete' jail.pk %}" class="btn btn-danger {% if jail.status == 'R' %}disabled{% endif %} ">Destroy</a>
+                {% if jail.status == 'R' %}<div class="help-block">Running jail cannot be destroyed</div>{% endif %}
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h3><p>Charts:</p></h3>
+    <figure>
+        <embed type="image/svg+xml" src="{% url 'fs_chart' jail.pk %}" />
+    </figure>
+    <figure>
+        <embed type="image/svg+xml" src="{% url 'rctl_io_chart' jail.pk %}" />
+    </figure>
+
+{#     {% for a in charts %} #}
+{#         <figure> #}
+{#             <embed type="image/svg+xml" src="{% url 'rctl_chart' jail.pk a %}" /> #}
+{#         </figure> #}
+{#     {% endfor %} #}
+
+{% endblock %}
+{% block context_menu %}
+    <a href="{% url 'admin:felis_jail_change' jail.pk %}">Edit&nbsp;</a>
+    {% if jail.console %}
+    <a href=""></a>
+    {% endif %}
+{% endblock %}
